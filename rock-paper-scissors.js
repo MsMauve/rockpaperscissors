@@ -3,10 +3,12 @@
 const btnBox = document.querySelector("#player-selectors");
 const resultsBox = document.querySelector("#game-results");
 const roundResultsBox = document.querySelector("#round-results");
+const finalResultsBox = document.querySelector("#final-tally");
 
 const playerScoreDisplay = document.querySelector("#p-score");
 const computerScoreDisplay = document.querySelector("#c-score");
 const currentRoundDisplay = document.querySelector("#results");
+const finalResultsDisplay = document.querySelector("#tally-text");
 
 let humanScore = 0;
 let computerScore = 0;
@@ -27,10 +29,31 @@ function updateScoreDisplay() {
     computerScoreDisplay.textContent = computerScore;
 };
 
+function decideWinner() {
+    if (humanScore === 5) {
+        finalResultsDisplay.textContent = "Congrats! You won; play again?";
+        resetBtn = document.createElement("button");
+        resetBtn.textContent = "Refresh Page";
+        finalResultsBox.appendChild(resetBtn);
+
+        resetBtn.addEventListener('click', () => {
+            location.reload();
+        });
+    } else if (computerScore === 5) {
+        finalResultsDisplay.textContent = "The Singularity is upon us! You lost; play again?";
+        resetBtn = document.createElement("button");
+        resetBtn.textContent = "Refresh Page";
+        finalResultsBox.appendChild(resetBtn);
+
+        resetBtn.addEventListener('click', () => {
+            location.reload();
+        });
+    }
+}
+
 // Event Handlers for new buttons! Holy shit it worked
 btnBox.addEventListener('click', (event) => {
     let targetBtn = event.target;
-
 
     switch(targetBtn.id) {
         case 'rock':
@@ -56,10 +79,12 @@ function playRound(humanSelection, computerSelection) {
         currentRoundDisplay.textContent = `You Win! ${humanSelection} beats ${computerSelection}.`;
         humanScore++;
         updateScoreDisplay();
+        decideWinner();
     } else {
         currentRoundDisplay.textContent = `You Lose! ${computerSelection} beats ${humanSelection}.`;
         computerScore++;
         updateScoreDisplay();
+        decideWinner();
     }
 }
 

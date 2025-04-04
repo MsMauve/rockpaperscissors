@@ -1,0 +1,17 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rebeccapurple;
+    color: white;
+}
+#player-selectors {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+button {
+    background-color: rebeccapurple;
+    color: white;
+    border-radius: 8px;
+}
