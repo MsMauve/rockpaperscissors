@@ -9,9 +9,38 @@ function getComputerChoice() {
     }
 }
 
+// Div Assignment DONE
+// Score Display Assignment DONE
+const btnBox = document.querySelector("#player-selectors")
+const resultsBox = document.querySelector("#results")
+
+let humanScore = 0;
+let computerScore = 0;
+
+// Event Handlers for new buttons! Holy shit it worked
+btnBox.addEventListener('click', (event) => {
+    let targetBtn = event.target;
+
+
+    switch(targetBtn.id) {
+        case 'rock':
+            playRound('Rock', getComputerChoice());
+            break;
+        case 'paper':
+            playRound('Paper', getComputerChoice());
+            break;
+        case 'scissors':
+            playRound('Scissors', getComputerChoice());
+            break;
+    }
+});
+// function getHumanChoice() {
+//    const humanChoice =  prompt("Rock, Paper, or Scissors?").toLowerCase();
+//    return humanChoice[0].toUpperCase() + humanChoice.slice(1);
+// }
+
 function getHumanChoice() {
-   const humanChoice =  prompt("Rock, Paper, or Scissors?").toLowerCase();
-   return humanChoice[0].toUpperCase() + humanChoice.slice(1);
+
 }
 
 function displayScores(humanScore, computerScore) {
@@ -20,44 +49,26 @@ function displayScores(humanScore, computerScore) {
         Computer Score = ${computerScore}
         `)
 }
-
-function playGame() {
-
-    let humanScore = 0;
-    let computerScore = 0;
-
-    function playRound(humanSelection, computerSelection) {
-        if (humanSelection === computerSelection) {
-            console.log("You Tied!");
-            displayScores(humanScore, computerScore);
-        } else if (
-            (humanSelection === 'Rock' && computerSelection === 'Scissors') ||
-            (humanSelection === 'Paper' && computerSelection === 'Rock') ||
-            (humanSelection === 'Scissors' && computerSelection == 'Paper')
-        ) {
-            console.log(`You Win! ${humanSelection} beats ${computerSelection}`);
-            humanScore++;
-            displayScores(humanScore, computerScore);
-        } else {
-            console.log(`You Lose! ${computerSelection} beats ${humanSelection}`);
-            computerScore++;
-            displayScores(humanScore, computerScore);
-        }
-    }
-
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-
-    if (humanScore === computerScore) {
-        console.log('You Tied the Computer! Congratulations?');
-    } else if (humanScore > computerScore) {
-        console.log('You Beat the Computer! Congratulations!');
+function playRound(humanSelection, computerSelection) {
+    if (humanSelection === computerSelection) {
+        console.log("You Tied!");
+    } else if (
+        (humanSelection === 'Rock' && computerSelection === 'Scissors') ||
+        (humanSelection === 'Paper' && computerSelection === 'Rock') ||
+        (humanSelection === 'Scissors' && computerSelection == 'Paper')
+    ) {
+        console.log(`You Win! ${humanSelection} beats ${computerSelection}`);
+        humanScore++;
     } else {
-        console.log('The Computer Beat You! Try Again?');
+        console.log(`You Lose! ${computerSelection} beats ${humanSelection}`);
+        computerScore++;
     }
 }
-
-playGame();
+    // OLD VICTORY DECISION TREE (FUNCTION WRAP)
+    // if (humanScore === computerScore) {
+    //     console.log('You Tied the Computer! Congratulations?');
+    // } else if (humanScore > computerScore) {
+    //     console.log('You Beat the Computer! Congratulations!');
+    // } else {
+    //     console.log('The Computer Beat You! Try Again?');
+    // }
