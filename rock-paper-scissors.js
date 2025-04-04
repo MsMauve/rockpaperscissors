@@ -51,7 +51,6 @@ function decideWinner() {
     }
 }
 
-// Event Handlers for new buttons! Holy shit it worked
 btnBox.addEventListener('click', (event) => {
     let targetBtn = event.target;
 
@@ -89,11 +88,3 @@ function playRound(humanSelection, computerSelection) {
 }
 
 updateScoreDisplay();
-    // OLD VICTORY DECISION TREE (FUNCTION WRAP)
-    // if (humanScore === computerScore) {
-    //     console.log('You Tied the Computer! Congratulations?');
-    // } else if (humanScore > computerScore) {
-    //     console.log('You Beat the Computer! Congratulations!');
-    // } else {
-    //     console.log('The Computer Beat You! Try Again?');
-    // }
