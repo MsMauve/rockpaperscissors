@@ -1,3 +1,16 @@
+// Div Assignment DONE
+// Score Display Assignment DONE
+const btnBox = document.querySelector("#player-selectors");
+const resultsBox = document.querySelector("#game-results");
+const roundResultsBox = document.querySelector("#round-results");
+
+const playerScoreDisplay = document.querySelector("#p-score");
+const computerScoreDisplay = document.querySelector("#c-score");
+const currentRoundDisplay = document.querySelector("#results");
+
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
     const choiceSeed = Math.floor(Math.random() * 3) + 1;
     if (choiceSeed === 1) {
@@ -9,13 +22,10 @@ function getComputerChoice() {
     }
 }
 
-// Div Assignment DONE
-// Score Display Assignment DONE
-const btnBox = document.querySelector("#player-selectors")
-const resultsBox = document.querySelector("#results")
-
-let humanScore = 0;
-let computerScore = 0;
+function updateScoreDisplay() {
+    playerScoreDisplay.textContent = humanScore;
+    computerScoreDisplay.textContent = computerScore;
+};
 
 // Event Handlers for new buttons! Holy shit it worked
 btnBox.addEventListener('click', (event) => {
@@ -34,36 +44,26 @@ btnBox.addEventListener('click', (event) => {
             break;
     }
 });
-// function getHumanChoice() {
-//    const humanChoice =  prompt("Rock, Paper, or Scissors?").toLowerCase();
-//    return humanChoice[0].toUpperCase() + humanChoice.slice(1);
-// }
 
-function getHumanChoice() {
-
-}
-
-function displayScores(humanScore, computerScore) {
-    console.log(`
-        Player Score = ${humanScore}
-        Computer Score = ${computerScore}
-        `)
-}
 function playRound(humanSelection, computerSelection) {
     if (humanSelection === computerSelection) {
-        console.log("You Tied!");
+        currentRoundDisplay.textContent = "You Tied!";
     } else if (
         (humanSelection === 'Rock' && computerSelection === 'Scissors') ||
         (humanSelection === 'Paper' && computerSelection === 'Rock') ||
         (humanSelection === 'Scissors' && computerSelection == 'Paper')
     ) {
-        console.log(`You Win! ${humanSelection} beats ${computerSelection}`);
+        currentRoundDisplay.textContent = `You Win! ${humanSelection} beats ${computerSelection}.`;
         humanScore++;
+        updateScoreDisplay();
     } else {
-        console.log(`You Lose! ${computerSelection} beats ${humanSelection}`);
+        currentRoundDisplay.textContent = `You Lose! ${computerSelection} beats ${humanSelection}.`;
         computerScore++;
+        updateScoreDisplay();
     }
 }
+
+updateScoreDisplay();
     // OLD VICTORY DECISION TREE (FUNCTION WRAP)
     // if (humanScore === computerScore) {
     //     console.log('You Tied the Computer! Congratulations?');
